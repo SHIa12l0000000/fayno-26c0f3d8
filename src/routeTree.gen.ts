@@ -21,8 +21,11 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedFamilyIndexRouteImport } from './routes/_authenticated/family/index'
 import { Route as AuthenticatedFamilyNewRouteImport } from './routes/_authenticated/family/new'
+import { Route as AuthenticatedFamilyIdIndexRouteImport } from './routes/_authenticated/family/$id/index'
+import { Route as AuthenticatedFamilyIdEditRouteImport } from './routes/_authenticated/family/$id/edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -83,6 +86,11 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedFamilyIndexRoute =
   AuthenticatedFamilyIndexRouteImport.update({
     id: '/family/',
@@ -94,6 +102,18 @@ const AuthenticatedFamilyNewRoute = AuthenticatedFamilyNewRouteImport.update({
   path: '/family/new',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFamilyIdIndexRoute =
+  AuthenticatedFamilyIdIndexRouteImport.update({
+    id: '/family/$id/',
+    path: '/family/$id/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFamilyIdEditRoute =
+  AuthenticatedFamilyIdEditRouteImport.update({
+    id: '/family/$id/edit',
+    path: '/family/$id/edit',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -107,8 +127,11 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/family/new': typeof AuthenticatedFamilyNewRoute
   '/family/': typeof AuthenticatedFamilyIndexRoute
+  '/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
+  '/family/$id/': typeof AuthenticatedFamilyIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -122,8 +145,11 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/family/new': typeof AuthenticatedFamilyNewRoute
   '/family': typeof AuthenticatedFamilyIndexRoute
+  '/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
+  '/family/$id': typeof AuthenticatedFamilyIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,8 +165,11 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/family/new': typeof AuthenticatedFamilyNewRoute
   '/_authenticated/family/': typeof AuthenticatedFamilyIndexRoute
+  '/_authenticated/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
+  '/_authenticated/family/$id/': typeof AuthenticatedFamilyIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -156,8 +185,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/dashboard'
     | '/onboarding'
+    | '/profile'
     | '/family/new'
     | '/family/'
+    | '/family/$id/edit'
+    | '/family/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,8 +203,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/dashboard'
     | '/onboarding'
+    | '/profile'
     | '/family/new'
     | '/family'
+    | '/family/$id/edit'
+    | '/family/$id'
   id:
     | '__root__'
     | '/'
@@ -187,8 +222,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
+    | '/_authenticated/profile'
     | '/_authenticated/family/new'
     | '/_authenticated/family/'
+    | '/_authenticated/family/$id/edit'
+    | '/_authenticated/family/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -290,6 +328,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/family/': {
       id: '/_authenticated/family/'
       path: '/family'
@@ -304,21 +349,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFamilyNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/family/$id/': {
+      id: '/_authenticated/family/$id/'
+      path: '/family/$id'
+      fullPath: '/family/$id/'
+      preLoaderRoute: typeof AuthenticatedFamilyIdIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/family/$id/edit': {
+      id: '/_authenticated/family/$id/edit'
+      path: '/family/$id/edit'
+      fullPath: '/family/$id/edit'
+      preLoaderRoute: typeof AuthenticatedFamilyIdEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedFamilyNewRoute: typeof AuthenticatedFamilyNewRoute
   AuthenticatedFamilyIndexRoute: typeof AuthenticatedFamilyIndexRoute
+  AuthenticatedFamilyIdEditRoute: typeof AuthenticatedFamilyIdEditRoute
+  AuthenticatedFamilyIdIndexRoute: typeof AuthenticatedFamilyIdIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedFamilyNewRoute: AuthenticatedFamilyNewRoute,
   AuthenticatedFamilyIndexRoute: AuthenticatedFamilyIndexRoute,
+  AuthenticatedFamilyIdEditRoute: AuthenticatedFamilyIdEditRoute,
+  AuthenticatedFamilyIdIndexRoute: AuthenticatedFamilyIdIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
