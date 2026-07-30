@@ -27,14 +27,16 @@ function Dashboard() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("family_members")
-        .select("privacy")
-        .eq("user_id", profile!.id);
+        .select("privacy, id, full_name")
+        .eq("user_id", profile!.id)
+        .order("created_at", { ascending: false });
       if (error) throw error;
       const rows = data ?? [];
       return {
         total: rows.length,
         public: rows.filter((r) => r.privacy === "public").length,
         private: rows.filter((r) => r.privacy === "private").length,
+        recent: rows.slice(0, 3),
       };
     },
   });
@@ -97,6 +99,28 @@ function Dashboard() {
             <Button asChild className="mt-5" size="sm">
               <Link to="/family/new">Add your first member</Link>
             </Button>
+          </div>
+        ) : null}
+
+        {!isLoading && stats && stats.total > 0 && stats.recent && stats.recent.length > 0 ? (
+          <div className="mt-10">
+            <h2 className="text-lg font-semibold">Recently added</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {stats.recent.map((member: any) => (
+                <Link
+                  key={member.id}
+                  to="/family/$id"
+                  params={{ id: member.id }}
+                  className="flex items-center gap-3 rounded-lg border border-border bg-card p-3 transition-colors hover:bg-surface"
+                >
+                  <div className="h-10 w-10 shrink-0 rounded-lg bg-muted" aria-hidden />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium">{member.full_name}</p>
+                    <p className="truncate text-xs text-muted-foreground">View details</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         ) : null}
       </div>
