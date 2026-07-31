@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Photo } from "@/components/Photo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -59,6 +60,7 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle size="sm" />
           {loading ? (
             <div className="h-9 w-24 animate-pulse rounded-md bg-muted" />
           ) : user ? (
@@ -140,6 +142,10 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-2 border-t border-border pt-3">
+              <div className="flex items-center justify-between px-2 py-2">
+                <span className="text-sm text-muted-foreground">Theme</span>
+                <ThemeToggle size="sm" showLabel />
+              </div>
               {user ? (
                 <>
                   <Button asChild variant="outline" size="sm" onClick={() => setOpen(false)}>
