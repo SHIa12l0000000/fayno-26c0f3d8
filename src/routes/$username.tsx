@@ -9,6 +9,7 @@ import type { Profile } from "@/lib/auth";
 export const Route = createFileRoute("/$username")({
   head: ({ params }) => {
     const handle = params.username.replace(/^@/, "");
+    const url = `https://fayno.lovable.app/@${handle}`;
     return {
       meta: [
         { title: `@${handle} — FAYNO` },
@@ -21,9 +22,30 @@ export const Route = createFileRoute("/$username")({
           property: "og:description",
           content: `Public family record shared by @${handle} on FAYNO.`,
         },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            url,
+            name: `@${handle} — FAYNO`,
+            mainEntity: {
+              "@type": "Person",
+              name: handle,
+              alternateName: `@${handle}`,
+              identifier: handle,
+              url,
+            },
+          }),
+        },
       ],
     };
   },
+
   component: PublicProfile,
 });
 

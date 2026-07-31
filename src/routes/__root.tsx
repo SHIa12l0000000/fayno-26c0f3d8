@@ -104,7 +104,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://fayno.lovable.app/#organization",
+              name: "FAYNO",
+              url: "https://fayno.lovable.app",
+              logo: "https://fayno.lovable.app/fayno-logo.png",
+              description:
+                "FAYNO helps families preserve names, photos and memories in one secure place.",
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://fayno.lovable.app/#website",
+              name: "FAYNO",
+              url: "https://fayno.lovable.app",
+              publisher: { "@id": "https://fayno.lovable.app/#organization" },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://fayno.lovable.app/search?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
