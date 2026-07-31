@@ -101,7 +101,7 @@ export function Navbar() {
             </DropdownMenu>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="outline" size="sm">
                 <Link to="/auth" search={{ mode: "login" }}>
                   Login
                 </Link>
