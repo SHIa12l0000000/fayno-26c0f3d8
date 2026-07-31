@@ -111,7 +111,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      photo_is_public: { Args: { _object_name: string }; Returns: boolean }
+      photo_is_shared: { Args: { _object_name: string }; Returns: boolean }
+      profile_has_public_members: {
+        Args: { _profile_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       privacy_level: "public" | "family" | "private"
