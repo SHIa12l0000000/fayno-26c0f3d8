@@ -37,7 +37,7 @@ export function toFormValues(member?: FamilyMember | null): MemberFormValues {
     city: member?.city ?? "",
     occupation: member?.occupation ?? "",
     about: member?.about ?? "",
-    privacy: member?.privacy ?? "family",
+    privacy: member?.privacy ?? "public",
   };
 }
 
@@ -298,7 +298,14 @@ export function MemberForm({
                 onChange={() => set("privacy", option.value)}
                 className="sr-only"
               />
-              <span className="block text-sm font-medium">{option.label}</span>
+              <span className="flex items-center gap-2 text-sm font-medium">
+                {option.label}
+                {option.recommended ? (
+                  <span className="rounded-full bg-primary px-2 py-0.5 text-[11px] font-medium text-primary-foreground">
+                    Recommended
+                  </span>
+                ) : null}
+              </span>
               <span className="mt-1 block text-xs text-muted-foreground">{option.hint}</span>
             </label>
           ))}
