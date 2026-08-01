@@ -121,16 +121,16 @@ function FamilyDiagram() {
   return (
     <div className="relative rounded-2xl border border-border bg-surface p-6 sm:p-10">
       <div className="mx-auto max-w-sm">
-        <PersonCard name="Amar Singh" meta="1931 – 1998 · Kotla" />
+        <PersonCard name="Amar Singh" meta="1931 – 1998 · Kotla" photo={amarPhoto} />
         <Connector />
         <div className="grid grid-cols-2 gap-3">
-          <PersonCard name="Jaspal Singh" meta="b. 1958" compact />
-          <PersonCard name="Harbans Kaur" meta="b. 1961" compact />
+          <PersonCard name="Jaspal Singh" meta="b. 1958" photo={jaspalPhoto} compact />
+          <PersonCard name="Harbans Kaur" meta="b. 1961" photo={harbansPhoto} compact />
         </div>
         <Connector />
         <div className="grid grid-cols-2 gap-3">
-          <PersonCard name="Shivam" meta="b. 1994" compact />
-          <PersonCard name="Neha" meta="b. 1997" compact />
+          <PersonCard name="Shivam" meta="b. 1994" photo={shivamPhoto} compact />
+          <PersonCard name="Neha" meta="b. 1997" photo={nehaPhoto} compact />
         </div>
       </div>
     </div>
@@ -148,17 +148,24 @@ function Connector() {
 function PersonCard({
   name,
   meta,
+  photo,
   compact,
 }: {
   name: string;
   meta: string;
+  photo: string;
   compact?: boolean;
 }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-3 shadow-card">
-      <div
-        className={`shrink-0 rounded-lg bg-muted ${compact ? "h-8 w-8" : "h-10 w-10"}`}
-        aria-hidden
+      <img
+        src={photo}
+        alt={`Portrait of ${name}`}
+        loading="lazy"
+        decoding="async"
+        width={512}
+        height={512}
+        className={`shrink-0 rounded-lg bg-muted object-cover ${compact ? "h-8 w-8" : "h-10 w-10"}`}
       />
       <div className="min-w-0">
         <p className={`truncate font-medium ${compact ? "text-[13px]" : "text-sm"}`}>{name}</p>
@@ -167,3 +174,4 @@ function PersonCard({
     </div>
   );
 }
+
