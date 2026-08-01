@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
@@ -9,6 +10,12 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ size = "default", showLabel = false }: ThemeToggleProps) {
   const { resolvedTheme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
 
   return (
     <Button
@@ -16,11 +23,11 @@ export function ThemeToggle({ size = "default", showLabel = false }: ThemeToggle
       variant="outline"
       size={size === "sm" ? "sm" : "icon"}
       onClick={toggleTheme}
-      aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      title={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={label}
+      title={label}
       className={showLabel ? "gap-2" : undefined}
     >
-      {resolvedTheme === "dark" ? (
+      {isDark ? (
         <>
           <Sun className="h-4 w-4" aria-hidden />
           {showLabel ? <span>Light</span> : null}
@@ -34,3 +41,4 @@ export function ThemeToggle({ size = "default", showLabel = false }: ThemeToggle
     </Button>
   );
 }
+
