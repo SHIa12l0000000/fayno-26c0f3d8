@@ -2,6 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Images, Users } from "lucide-react";
 import { PageShell } from "@/components/site/PageShell";
 import { Button } from "@/components/ui/button";
+import amarPhoto from "@/assets/demo/amar.jpg";
+import jaspalPhoto from "@/assets/demo/jaspal.jpg";
+import harbansPhoto from "@/assets/demo/harbans.jpg";
+import shivamPhoto from "@/assets/demo/shivam.jpg";
+import nehaPhoto from "@/assets/demo/neha.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
