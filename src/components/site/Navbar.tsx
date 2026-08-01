@@ -90,6 +90,9 @@ export function Navbar() {
                 <DropdownMenuItem asChild>
                   <Link to="/profile">Profile</Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/settings">Settings</Link>
+                </DropdownMenuItem>
                 {profile ? (
                   <DropdownMenuItem asChild>
                     <Link to="/$username" params={{ username: `@${profile.username}` }}>
@@ -150,6 +153,9 @@ export function Navbar() {
                 <>
                   <Button asChild variant="outline" size="sm" onClick={() => setOpen(false)}>
                     <Link to="/dashboard">Dashboard</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm" onClick={() => setOpen(false)}>
+                    <Link to="/settings">Settings</Link>
                   </Button>
                   <Button
                     variant="ghost"
