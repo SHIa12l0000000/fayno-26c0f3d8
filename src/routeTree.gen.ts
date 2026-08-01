@@ -23,6 +23,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedFamilyIndexRouteImport } from './routes/_authenticated/family/index'
 import { Route as AuthenticatedFamilyNewRouteImport } from './routes/_authenticated/family/new'
 import { Route as AuthenticatedFamilyIdIndexRouteImport } from './routes/_authenticated/family/$id/index'
@@ -97,6 +98,11 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedFamilyIndexRoute =
   AuthenticatedFamilyIndexRouteImport.update({
     id: '/family/',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/family/new': typeof AuthenticatedFamilyNewRoute
   '/family/': typeof AuthenticatedFamilyIndexRoute
   '/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/family/new': typeof AuthenticatedFamilyNewRoute
   '/family': typeof AuthenticatedFamilyIndexRoute
   '/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/family/new': typeof AuthenticatedFamilyNewRoute
   '/_authenticated/family/': typeof AuthenticatedFamilyIndexRoute
   '/_authenticated/family/$id/edit': typeof AuthenticatedFamilyIdEditRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/settings'
     | '/family/new'
     | '/family/'
     | '/family/$id/edit'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/onboarding'
     | '/profile'
+    | '/settings'
     | '/family/new'
     | '/family'
     | '/family/$id/edit'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
+    | '/_authenticated/settings'
     | '/_authenticated/family/new'
     | '/_authenticated/family/'
     | '/_authenticated/family/$id/edit'
@@ -355,6 +367,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/family/': {
       id: '/_authenticated/family/'
       path: '/family'
@@ -390,6 +409,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedFamilyNewRoute: typeof AuthenticatedFamilyNewRoute
   AuthenticatedFamilyIndexRoute: typeof AuthenticatedFamilyIndexRoute
   AuthenticatedFamilyIdEditRoute: typeof AuthenticatedFamilyIdEditRoute
@@ -400,6 +420,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedFamilyNewRoute: AuthenticatedFamilyNewRoute,
   AuthenticatedFamilyIndexRoute: AuthenticatedFamilyIndexRoute,
   AuthenticatedFamilyIdEditRoute: AuthenticatedFamilyIdEditRoute,

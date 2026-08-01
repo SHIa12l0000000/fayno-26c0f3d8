@@ -19,6 +19,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/lib/utils";
 
@@ -187,9 +188,12 @@ function SettingsPage() {
               <p className="mt-1 text-sm text-muted-foreground">{t("deleteHint")}</p>
             </div>
             <AlertDialog>
-              <Button asChild variant="destructive" disabled={deleting}>
-                <AlertDialogTriggerButton />
-              </Button>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" disabled={deleting}>
+                  <Trash2 className="h-4 w-4" aria-hidden />
+                  {t("deleteAccount")}
+                </Button>
+              </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>{t("deleteConfirmTitle")}</AlertDialogTitle>
@@ -211,15 +215,5 @@ function SettingsPage() {
         </Section>
       </div>
     </PageShell>
-  );
-}
-
-function AlertDialogTriggerButton() {
-  const { t } = useLanguage();
-  return (
-    <span className="inline-flex items-center gap-2">
-      <Trash2 className="h-4 w-4" aria-hidden />
-      {t("deleteAccount")}
-    </span>
   );
 }
