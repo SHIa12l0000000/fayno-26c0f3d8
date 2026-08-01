@@ -21,11 +21,22 @@ export type FamilyMember = {
 export const MEMBER_COLUMNS =
   "id, user_id, photo, full_name, relation, father_name, mother_name, birth_year, death_year, village, city, occupation, about, privacy, created_at";
 
-export const PRIVACY_OPTIONS: { value: Privacy; label: string; hint: string }[] = [
-  { value: "public", label: "Public", hint: "Anyone can see this member on your public profile." },
+export const PRIVACY_OPTIONS: {
+  value: Privacy;
+  label: string;
+  hint: string;
+  recommended?: boolean;
+}[] = [
+  {
+    value: "public",
+    label: "Public",
+    hint: "Anyone can see this member on your public profile.",
+    recommended: true,
+  },
   { value: "family", label: "Family only", hint: "Only signed-in FAYNO members can see this record." },
   { value: "private", label: "Private", hint: "Only you can see this member." },
 ];
+
 
 export const RELATIONS = [
   "Father",
