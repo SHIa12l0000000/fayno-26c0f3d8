@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://wcffqwgwwwxxolbuypus.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "fayno",
+      "version": "0.1.0",
+      "title": "fayno"
+    },
+    "tools": [
+      {
+        "name": "get_my_profile",
+        "title": "Get my FAYNO profile",
+        "description": "Return the signed-in user's FAYNO profile (@username, display name, public profile link) plus a count of their family records by privacy level.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_family_members",
+        "title": "List family members",
+        "description": "List the family records saved by the signed-in FAYNO user, newest first. Optionally filter by privacy level or a name/village search term.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "privacy": {
+              "description": "Only return records with this privacy level.",
+              "type": "string",
+              "enum": [
+                "public",
+                "family",
+                "private"
+              ]
+            },
+            "search": {
+              "description": "Match against the member's full name.",
+              "type": "string"
+            },
+            "limit": {
+              "description": "Maximum records to return (default 25).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_family_member",
+        "title": "Add family member",
+        "description": "Add a new family record for the signed-in FAYNO user. Privacy defaults to 'public', which shows the member on the user's public profile.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "full_name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The person's full name."
+            },
+            "relation": {
+              "description": "Relation to the user, e.g. Father, Grandmother, Cousin.",
+              "type": "string"
+            },
+            "father_name": {
+              "type": "string"
+            },
+            "mother_name": {
+              "type": "string"
+            },
+            "birth_year": {
+              "description": "Year of birth, e.g. 1958.",
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "death_year": {
+              "description": "Year of death, if the person has passed away.",
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "village": {
+              "description": "Ancestral village or hometown.",
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "occupation": {
+              "type": "string"
+            },
+            "about": {
+              "description": "A short biography or memory.",
+              "type": "string"
+            },
+            "privacy": {
+              "description": "'public' (anyone), 'family' (signed-in FAYNO users) or 'private' (only the user).",
+              "type": "string",
+              "enum": [
+                "public",
+                "family",
+                "private"
+              ]
+            }
+          },
+          "required": [
+            "full_name"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "update_family_member",
+        "title": "Update family member",
+        "description": "Update fields on one of the signed-in user's existing family records. Only the fields you pass are changed.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The family record id, from list_family_members."
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "relation": {
+              "type": "string"
+            },
+            "father_name": {
+              "type": "string"
+            },
+            "mother_name": {
+              "type": "string"
+            },
+            "birth_year": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "death_year": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "village": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "occupation": {
+              "type": "string"
+            },
+            "about": {
+              "type": "string"
+            },
+            "privacy": {
+              "type": "string",
+              "enum": [
+                "public",
+                "family",
+                "private"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "delete_family_member",
+        "title": "Delete family member",
+        "description": "Permanently delete one of the signed-in user's family records. This cannot be undone — confirm the person first.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The family record id, from list_family_members."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
