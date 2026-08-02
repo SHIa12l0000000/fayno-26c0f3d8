@@ -29,8 +29,9 @@ export default defineTool({
 
     const patch = Object.fromEntries(
       Object.entries(fields).filter(([, value]) => value !== undefined),
-    );
+    ) as Partial<typeof fields>;
     if (Object.keys(patch).length === 0) return errorResult("Pass at least one field to update.");
+
 
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase
