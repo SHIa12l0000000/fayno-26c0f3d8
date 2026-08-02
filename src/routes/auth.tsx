@@ -155,7 +155,7 @@ function LoginCard({ next }: { next?: string }) {
       footer={
         <>
           New here?{" "}
-          <Link to="/auth" search={{ mode: "signup" }} className="text-foreground underline">
+          <Link to="/auth" search={{ mode: "signup", next }} className="text-foreground underline">
             Create an account
           </Link>
         </>
@@ -200,7 +200,7 @@ function LoginCard({ next }: { next?: string }) {
         </Button>
       </form>
       <Divider />
-      <GoogleButton label="Continue with Google" />
+      <GoogleButton label="Continue with Google" next={next} />
     </Card>
   );
 }
@@ -215,7 +215,7 @@ function Divider() {
   );
 }
 
-function SignUpCard() {
+function SignUpCard({ next }: { next?: string }) {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -247,7 +247,7 @@ function SignUpCard() {
       email: email.trim(),
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/dashboard`,
+        emailRedirectTo: `${window.location.origin}${next ?? "/dashboard"}`,
         data: { full_name: fullName.trim(), username },
       },
     });
@@ -296,7 +296,7 @@ function SignUpCard() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/auth" search={{ mode: "login" }} className="text-foreground underline">
+          <Link to="/auth" search={{ mode: "login", next }} className="text-foreground underline">
             Log in
           </Link>
         </>
@@ -359,7 +359,7 @@ function SignUpCard() {
         </Button>
       </form>
       <Divider />
-      <GoogleButton label="Sign up with Google" />
+      <GoogleButton label="Sign up with Google" next={next} />
     </Card>
   );
 }
