@@ -40,7 +40,11 @@ function SearchPage() {
     queryKey: ["search", query],
     enabled: query.length >= 2,
     queryFn: async () => {
-      const pattern = `%${query.replace(/[%_]/g, "")}%`;
+      // Strip LIKE wildcards and every PostgREST filter-syntax character so the
+      // term can only ever be matched as plain text, never parsed as filter syntax.
+      const safeTerm = query.replace(/[%_,.()*\\"':]/g, " ").replace(/\s+/g, " ").trim();
+      if (safeTerm.length < 2) return { profiles: [], members: [] };
+      const pattern = `%${safeTerm}%`;
       const [profiles, members] = await Promise.all([
         supabase
           .from("profiles")
@@ -54,6 +58,7 @@ function SearchPage() {
           .or(`full_name.ilike.${pattern},village.ilike.${pattern},city.ilike.${pattern}`)
           .limit(24),
       ]);
+
       return {
         profiles: (profiles.data ?? []) as Profile[],
         members: (members.data ?? []) as FamilyMember[],
