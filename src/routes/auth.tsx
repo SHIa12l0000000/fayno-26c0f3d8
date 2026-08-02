@@ -14,7 +14,17 @@ import { Label } from "@/components/ui/label";
 
 const searchSchema = z.object({
   mode: z.enum(["login", "signup", "forgot"]).catch("login"),
+  // Same-origin relative path to return to after signing in (used by the OAuth consent flow).
+  next: z.string().optional().catch(undefined),
 });
+
+/** Only allow same-origin relative paths, so `next` can never send users off-site. */
+function safeNext(next: string | undefined) {
+  if (!next) return undefined;
+  if (!next.startsWith("/") || next.startsWith("//")) return undefined;
+  return next;
+}
+
 
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
@@ -36,30 +46,39 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const { mode } = Route.useSearch();
+  const { mode, next } = Route.useSearch();
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const target = safeNext(next);
 
   useEffect(() => {
-    if (!loading && user) navigate({ to: "/dashboard", replace: true });
-  }, [loading, user, navigate]);
+    if (loading || !user) return;
+    if (target) window.location.assign(target);
+    else navigate({ to: "/dashboard", replace: true });
+  }, [loading, user, navigate, target]);
 
   return (
     <PageShell>
       <div className="mx-auto w-full max-w-md px-5 py-16 sm:py-24">
-        {mode === "signup" ? <SignUpCard /> : mode === "forgot" ? <ForgotCard /> : <LoginCard />}
+        {mode === "signup" ? (
+          <SignUpCard next={target} />
+        ) : mode === "forgot" ? (
+          <ForgotCard />
+        ) : (
+          <LoginCard next={target} />
+        )}
       </div>
     </PageShell>
   );
 }
 
-function GoogleButton({ label }: { label: string }) {
+function GoogleButton({ label, next }: { label: string; next?: string }) {
   const [busy, setBusy] = useState(false);
 
   async function handleGoogle() {
     setBusy(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+      redirect_uri: next ? `${window.location.origin}${next}` : window.location.origin,
     });
     if (result.error) {
       setBusy(false);
@@ -67,7 +86,7 @@ function GoogleButton({ label }: { label: string }) {
       return;
     }
     if (result.redirected) return;
-    window.location.assign("/dashboard");
+    window.location.assign(next ?? "/dashboard");
   }
 
   return (
@@ -77,6 +96,7 @@ function GoogleButton({ label }: { label: string }) {
     </Button>
   );
 }
+
 
 function Card({
   title,
@@ -99,7 +119,7 @@ function Card({
   );
 }
 
-function LoginCard() {
+function LoginCard({ next }: { next?: string }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -120,8 +140,13 @@ function LoginCard() {
       );
       return;
     }
+    if (next) {
+      window.location.assign(next);
+      return;
+    }
     navigate({ to: "/dashboard" });
   }
+
 
   return (
     <Card
