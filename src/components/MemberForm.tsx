@@ -108,14 +108,15 @@ export function MemberForm({
   async function handleFile(file: File | undefined) {
     if (!file) return;
     setUploadError(null);
-    if (!file.type.startsWith("image/")) {
-      setUploadError("Please choose an image file.");
+    if (!ALLOWED_PHOTO_TYPES[file.type]) {
+      setUploadError("Please choose a JPG, PNG, WebP or GIF image.");
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > MAX_PHOTO_BYTES) {
       setUploadError("Images must be smaller than 5 MB.");
       return;
     }
+
     setUploading(true);
     try {
       const path = await uploadPhoto(userId, file);
