@@ -61,8 +61,10 @@ function ProfilePage() {
 
   async function handlePhoto(file: File | undefined) {
     if (!file || !profile) return;
-    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file.");
-    if (file.size > 5 * 1024 * 1024) return toast.error("Images must be smaller than 5 MB.");
+    if (!ALLOWED_PHOTO_TYPES[file.type])
+      return toast.error("Please choose a JPG, PNG, WebP or GIF image.");
+    if (file.size > MAX_PHOTO_BYTES) return toast.error("Images must be smaller than 5 MB.");
+
     setUploading(true);
     try {
       const path = await uploadPhoto(profile.id, file);
