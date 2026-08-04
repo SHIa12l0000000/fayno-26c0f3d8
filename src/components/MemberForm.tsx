@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Photo } from "@/components/Photo";
 import { PRIVACY_OPTIONS, RELATIONS, type FamilyMember, type Privacy } from "@/lib/family";
-import { uploadPhoto } from "@/lib/photos";
+import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES, uploadPhoto } from "@/lib/photos";
 import { cn } from "@/lib/utils";
 
 export type MemberFormValues = {
