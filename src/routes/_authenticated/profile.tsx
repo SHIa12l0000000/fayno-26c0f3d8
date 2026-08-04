@@ -5,7 +5,7 @@ import { Loader2, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-import { uploadPhoto } from "@/lib/photos";
+import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES, uploadPhoto } from "@/lib/photos";
 import { PageShell } from "@/components/site/PageShell";
 import { Photo } from "@/components/Photo";
 import { Button } from "@/components/ui/button";
