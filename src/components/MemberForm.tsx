@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Photo } from "@/components/Photo";
 import { PRIVACY_OPTIONS, RELATIONS, type FamilyMember, type Privacy } from "@/lib/family";
-import { uploadPhoto } from "@/lib/photos";
+import { ALLOWED_PHOTO_TYPES, MAX_PHOTO_BYTES, uploadPhoto } from "@/lib/photos";
 import { cn } from "@/lib/utils";
 
 export type MemberFormValues = {
@@ -108,14 +108,15 @@ export function MemberForm({
   async function handleFile(file: File | undefined) {
     if (!file) return;
     setUploadError(null);
-    if (!file.type.startsWith("image/")) {
-      setUploadError("Please choose an image file.");
+    if (!ALLOWED_PHOTO_TYPES[file.type]) {
+      setUploadError("Please choose a JPG, PNG, WebP or GIF image.");
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > MAX_PHOTO_BYTES) {
       setUploadError("Images must be smaller than 5 MB.");
       return;
     }
+
     setUploading(true);
     try {
       const path = await uploadPhoto(userId, file);
@@ -159,7 +160,7 @@ export function MemberForm({
           <input
             id="member-photo"
             type="file"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif"
             className="sr-only"
             onChange={(e) => handleFile(e.target.files?.[0])}
           />
