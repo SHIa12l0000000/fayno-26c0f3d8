@@ -134,7 +134,7 @@ function ProfilePage() {
               <input
                 id="profile_photo"
                 type="file"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,image/gif"
                 className="sr-only"
                 onChange={(e) => handlePhoto(e.target.files?.[0])}
               />

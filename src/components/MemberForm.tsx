@@ -160,7 +160,7 @@ export function MemberForm({
           <input
             id="member-photo"
             type="file"
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif"
             className="sr-only"
             onChange={(e) => handleFile(e.target.files?.[0])}
           />
