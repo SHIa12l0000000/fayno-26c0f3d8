@@ -5,9 +5,17 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Service — FAYNO" },
-      { name: "description", content: "The terms that apply when you use FAYNO." },
+      {
+        name: "description",
+        content:
+          "The terms that apply when you use FAYNO: your account, ownership of the family records and photos you upload, privacy settings, and acceptable use.",
+      },
       { property: "og:title", content: "Terms of Service — FAYNO" },
-      { property: "og:description", content: "The terms that apply when you use FAYNO." },
+      {
+        property: "og:description",
+        content:
+          "The terms that apply when you use FAYNO: your account, ownership of the family records and photos you upload, privacy settings, and acceptable use.",
+      },
     ],
   }),
   component: () => (
