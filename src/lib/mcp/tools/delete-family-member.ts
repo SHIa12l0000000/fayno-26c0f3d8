@@ -11,7 +11,12 @@ export default defineTool({
   inputSchema: {
     id: z.string().trim().min(1).describe("The family record id, from list_family_members."),
   },
-  annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: true,
+    idempotentHint: true,
+    openWorldHint: false,
+  },
   handler: async ({ id }, ctx) => {
     const denied = requireUser(ctx);
     if (denied) return denied;

@@ -27,7 +27,6 @@ export async function uploadPhoto(userId: string, file: File) {
   return path;
 }
 
-
 export function usePhotoUrl(path: string | null | undefined) {
   const { data } = useQuery({
     queryKey: ["photo", path],

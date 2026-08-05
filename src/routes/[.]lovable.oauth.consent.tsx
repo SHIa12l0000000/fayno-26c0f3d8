@@ -110,8 +110,8 @@ function Consent() {
             <li>• Add, edit and delete family records</li>
           </ul>
           <p className="mt-4 text-sm text-muted-foreground">
-            It can never see other people&apos;s private records. You can disconnect at any time from
-            the connected app.
+            It can never see other people&apos;s private records. You can disconnect at any time
+            from the connected app.
           </p>
           {error ? (
             <p role="alert" className="mt-4 text-sm text-destructive">

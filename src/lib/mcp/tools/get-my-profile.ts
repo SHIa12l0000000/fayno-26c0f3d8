@@ -1,6 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { supabaseForUser } from "../supabase";
 import { errorResult, requireUser, textResult } from "../result";
+import { SITE_URL } from "@/lib/site";
 
 export default defineTool({
   name: "get_my_profile",
@@ -18,7 +19,11 @@ export default defineTool({
 
     const [{ data: profile, error: profileError }, { data: members, error: membersError }] =
       await Promise.all([
-        supabase.from("profiles").select("username, full_name, created_at").eq("id", userId).maybeSingle(),
+        supabase
+          .from("profiles")
+          .select("username, full_name, created_at")
+          .eq("id", userId)
+          .maybeSingle(),
         supabase.from("family_members").select("privacy").eq("user_id", userId),
       ]);
 
@@ -32,7 +37,7 @@ export default defineTool({
     const summary = {
       username: profile.username,
       full_name: profile.full_name,
-      public_profile_url: `https://fayno.lovable.app/${profile.username}`,
+      public_profile_url: `${SITE_URL}/${profile.username}`,
       member_counts: counts,
     };
     return textResult(JSON.stringify(summary, null, 2), summary);

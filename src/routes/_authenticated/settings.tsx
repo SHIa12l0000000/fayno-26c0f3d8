@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { useAuth } from "@/lib/auth";
 import { LANGUAGES, useLanguage } from "@/lib/language";
+import { currentOrigin } from "@/lib/site";
 import { deleteMyAccount } from "@/lib/account.functions";
 import { PageShell } from "@/components/site/PageShell";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -72,9 +73,7 @@ function SettingsPage() {
   const deleteAccount = useServerFn(deleteMyAccount);
   const [deleting, setDeleting] = useState(false);
 
-  const inviteLink = profile
-    ? `https://fayno.lovable.app/@${profile.username}`
-    : "https://fayno.lovable.app";
+  const inviteLink = profile ? `${currentOrigin()}/@${profile.username}` : currentOrigin();
 
   async function handleLogout() {
     await queryClient.cancelQueries();

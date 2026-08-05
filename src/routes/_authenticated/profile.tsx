@@ -18,7 +18,10 @@ export const Route = createFileRoute("/_authenticated/profile")({
       { title: "Your profile — FAYNO" },
       { name: "description", content: "Update your FAYNO name, username, photo and password." },
       { property: "og:title", content: "Your profile — FAYNO" },
-      { property: "og:description", content: "Update your FAYNO name, username, photo and password." },
+      {
+        property: "og:description",
+        content: "Update your FAYNO name, username, photo and password.",
+      },
     ],
   }),
   component: ProfilePage,

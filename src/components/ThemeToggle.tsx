@@ -41,4 +41,3 @@ export function ThemeToggle({ size = "default", showLabel = false }: ThemeToggle
     </Button>
   );
 }
-

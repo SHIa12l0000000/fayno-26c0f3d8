@@ -7,7 +7,9 @@ export const deleteMyAccount = createServerFn({ method: "POST" })
     const { userId } = context;
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { data: files } = await supabaseAdmin.storage.from("photos").list(userId, { limit: 1000 });
+    const { data: files } = await supabaseAdmin.storage
+      .from("photos")
+      .list(userId, { limit: 1000 });
     if (files?.length) {
       await supabaseAdmin.storage
         .from("photos")

@@ -10,9 +10,15 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — FAYNO" },
-      { name: "description", content: "Your FAYNO dashboard: family records, additions and shortcuts." },
+      {
+        name: "description",
+        content: "Your FAYNO dashboard: family records, additions and shortcuts.",
+      },
       { property: "og:title", content: "Dashboard — FAYNO" },
-      { property: "og:description", content: "Your FAYNO dashboard: family records and shortcuts." },
+      {
+        property: "og:description",
+        content: "Your FAYNO dashboard: family records and shortcuts.",
+      },
     ],
   }),
   component: Dashboard,
@@ -106,7 +112,7 @@ function Dashboard() {
           <div className="mt-10">
             <h2 className="text-lg font-semibold">Recently added</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {stats.recent.map((member: any) => (
+              {stats.recent.map((member) => (
                 <Link
                   key={member.id}
                   to="/family/$id"

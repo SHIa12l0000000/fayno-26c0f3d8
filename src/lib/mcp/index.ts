@@ -7,7 +7,7 @@ import getMyProfile from "./tools/get-my-profile";
 
 // The OAuth issuer must be the direct Supabase host. VITE_SUPABASE_PROJECT_ID is
 // inlined by Vite at build time and survives publish unchanged.
-const projectRef = import.meta.env['VITE_SUPABASE_PROJECT_ID'] ?? "project-ref-unset";
+const projectRef = import.meta.env["VITE_SUPABASE_PROJECT_ID"] ?? "project-ref-unset";
 
 export default defineMcp({
   name: "fayno",
@@ -19,5 +19,11 @@ export default defineMcp({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",
   }),
-  tools: [getMyProfile, listFamilyMembers, createFamilyMember, updateFamilyMember, deleteFamilyMember],
+  tools: [
+    getMyProfile,
+    listFamilyMembers,
+    createFamilyMember,
+    updateFamilyMember,
+    deleteFamilyMember,
+  ],
 });
