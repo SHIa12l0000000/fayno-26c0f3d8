@@ -18,7 +18,11 @@ export default defineTool({
     father_name: z.string().trim().optional(),
     mother_name: z.string().trim().optional(),
     birth_year: z.number().int().optional().describe("Year of birth, e.g. 1958."),
-    death_year: z.number().int().optional().describe("Year of death, if the person has passed away."),
+    death_year: z
+      .number()
+      .int()
+      .optional()
+      .describe("Year of death, if the person has passed away."),
     village: z.string().trim().optional().describe("Ancestral village or hometown."),
     city: z.string().trim().optional(),
     occupation: z.string().trim().optional(),
@@ -26,7 +30,9 @@ export default defineTool({
     privacy: z
       .enum(["public", "family", "private"])
       .optional()
-      .describe("'public' (anyone), 'family' (signed-in FAYNO users) or 'private' (only the user)."),
+      .describe(
+        "'public' (anyone), 'family' (signed-in FAYNO users) or 'private' (only the user).",
+      ),
   },
   annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: false },
   handler: async (input, ctx) => {

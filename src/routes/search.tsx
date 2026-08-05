@@ -42,7 +42,10 @@ function SearchPage() {
     queryFn: async () => {
       // Strip LIKE wildcards and every PostgREST filter-syntax character so the
       // term can only ever be matched as plain text, never parsed as filter syntax.
-      const safeTerm = query.replace(/[%_,.()*\\"':]/g, " ").replace(/\s+/g, " ").trim();
+      const safeTerm = query
+        .replace(/[%_,.()*\\"':]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
       if (safeTerm.length < 2) return { profiles: [], members: [] };
       const pattern = `%${safeTerm}%`;
       const [profiles, members] = await Promise.all([
@@ -154,7 +157,9 @@ function SearchPage() {
 
               {data!.members.length > 0 ? (
                 <section>
-                  <h2 className="text-sm font-medium text-muted-foreground">Public family records</h2>
+                  <h2 className="text-sm font-medium text-muted-foreground">
+                    Public family records
+                  </h2>
                   <ul className="mt-3 grid gap-3 sm:grid-cols-2">
                     {data!.members.map((member) => (
                       <li

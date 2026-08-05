@@ -44,7 +44,10 @@ function EditMember() {
   });
 
   async function handleSubmit(values: MemberFormValues) {
-    const { error } = await supabase.from("family_members").update(memberPayload(values)).eq("id", id);
+    const { error } = await supabase
+      .from("family_members")
+      .update(memberPayload(values))
+      .eq("id", id);
     if (error) {
       toast.error("We couldn't save your changes. Please try again.");
       return;

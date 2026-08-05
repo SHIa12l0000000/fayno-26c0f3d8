@@ -12,7 +12,8 @@ export function errorResult(text: string) {
 
 /** Returns an error result when the caller has no verified identity. */
 export function requireUser(ctx: ToolContext) {
-  if (!ctx.isAuthenticated()) return errorResult("Not authenticated. Connect your FAYNO account first.");
+  if (!ctx.isAuthenticated())
+    return errorResult("Not authenticated. Connect your FAYNO account first.");
   const userId = ctx.getUserId();
   if (!userId) return errorResult("This token carries no user identity.");
   return null;

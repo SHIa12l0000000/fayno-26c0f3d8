@@ -15,7 +15,10 @@ export const Route = createFileRoute("/_authenticated/onboarding")({
       { title: "Choose your username — FAYNO" },
       { name: "description", content: "Pick the username for your public FAYNO family page." },
       { property: "og:title", content: "Choose your username — FAYNO" },
-      { property: "og:description", content: "Pick the username for your public FAYNO family page." },
+      {
+        property: "og:description",
+        content: "Pick the username for your public FAYNO family page.",
+      },
     ],
   }),
   component: Onboarding,
@@ -33,7 +36,11 @@ function suggest(base: string) {
 function Onboarding() {
   const { user, refreshProfile } = useAuth();
   const navigate = useNavigate();
-  const metadata = (user?.user_metadata ?? {}) as { full_name?: string; username?: string; name?: string };
+  const metadata = (user?.user_metadata ?? {}) as {
+    full_name?: string;
+    username?: string;
+    name?: string;
+  };
 
   const [fullName, setFullName] = useState(metadata.full_name ?? metadata.name ?? "");
   const [username, setUsername] = useState(
@@ -112,9 +119,7 @@ function Onboarding() {
                   className="h-9 w-full bg-transparent text-sm outline-none"
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
-                fayno.com/@{username || "username"}
-              </p>
+              <p className="text-xs text-muted-foreground">fayno.com/@{username || "username"}</p>
             </div>
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
             {suggestions.length > 0 ? (

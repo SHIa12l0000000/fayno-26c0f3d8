@@ -10,9 +10,15 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — FAYNO" },
-      { name: "description", content: "Your FAYNO dashboard: family records, additions and shortcuts." },
+      {
+        name: "description",
+        content: "Your FAYNO dashboard: family records, additions and shortcuts.",
+      },
       { property: "og:title", content: "Dashboard — FAYNO" },
-      { property: "og:description", content: "Your FAYNO dashboard: family records and shortcuts." },
+      {
+        property: "og:description",
+        content: "Your FAYNO dashboard: family records and shortcuts.",
+      },
     ],
   }),
   component: Dashboard,

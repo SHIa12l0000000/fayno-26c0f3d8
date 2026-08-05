@@ -29,13 +29,41 @@ export const Route = createFileRoute("/blog/how-to-start-a-family-tree")({
           url: URL,
           totalTime: "PT1H",
           step: [
-            { "@type": "HowToStep", name: "Start with yourself", text: "Write your own full name, birth year and birthplace, then work backwards one generation at a time." },
-            { "@type": "HowToStep", name: "Write down what you already know", text: "Record parents, grandparents and their siblings from memory before doing any research." },
-            { "@type": "HowToStep", name: "Interview your oldest relatives", text: "Ask about names, villages, occupations and stories, and record the conversation." },
-            { "@type": "HowToStep", name: "Collect documents and photographs", text: "Gather certificates, land papers, letters and photo backs for names and dates." },
-            { "@type": "HowToStep", name: "Record each person consistently", text: "Use full names at birth, four-digit years, and place names as they were known then." },
-            { "@type": "HowToStep", name: "Note what you are unsure about", text: "Mark estimates and unverified facts so future readers know what still needs checking." },
-            { "@type": "HowToStep", name: "Keep it in one shareable place", text: "Store the tree online so relatives can read it and it survives lost notebooks and phones." },
+            {
+              "@type": "HowToStep",
+              name: "Start with yourself",
+              text: "Write your own full name, birth year and birthplace, then work backwards one generation at a time.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Write down what you already know",
+              text: "Record parents, grandparents and their siblings from memory before doing any research.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Interview your oldest relatives",
+              text: "Ask about names, villages, occupations and stories, and record the conversation.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Collect documents and photographs",
+              text: "Gather certificates, land papers, letters and photo backs for names and dates.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Record each person consistently",
+              text: "Use full names at birth, four-digit years, and place names as they were known then.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Note what you are unsure about",
+              text: "Mark estimates and unverified facts so future readers know what still needs checking.",
+            },
+            {
+              "@type": "HowToStep",
+              name: "Keep it in one shareable place",
+              text: "Store the tree online so relatives can read it and it survives lost notebooks and phones.",
+            },
           ],
         }),
       },
@@ -149,11 +177,15 @@ function Guide() {
       <section className="space-y-4">
         <h2>Start your tree now</h2>
         <p>
-          FAYNO is built for exactly this first hour: add a person, add their parents&apos; names and
-          village, choose who can see it, and share your profile link with the family.
+          FAYNO is built for exactly this first hour: add a person, add their parents&apos; names
+          and village, choose who can see it, and share your profile link with the family.
         </p>
         <p>
-          <Link to="/auth" search={{ mode: "signup" }} className="font-medium text-primary underline">
+          <Link
+            to="/auth"
+            search={{ mode: "signup" }}
+            className="font-medium text-primary underline"
+          >
             Create a free FAYNO account
           </Link>{" "}
           or{" "}

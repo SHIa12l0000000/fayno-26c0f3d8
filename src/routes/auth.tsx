@@ -25,7 +25,6 @@ function safeNext(next: string | undefined) {
   return next;
 }
 
-
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
   head: () => ({
@@ -90,13 +89,18 @@ function GoogleButton({ label, next }: { label: string; next?: string }) {
   }
 
   return (
-    <Button type="button" variant="outline" className="w-full" onClick={handleGoogle} disabled={busy}>
+    <Button
+      type="button"
+      variant="outline"
+      className="w-full"
+      onClick={handleGoogle}
+      disabled={busy}
+    >
       {busy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
       {label}
     </Button>
   );
 }
-
 
 function Card({
   title,
@@ -146,7 +150,6 @@ function LoginCard({ next }: { next?: string }) {
     }
     navigate({ to: "/dashboard" });
   }
-
 
   return (
     <Card

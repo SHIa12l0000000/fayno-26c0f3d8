@@ -17,7 +17,13 @@ export default defineTool({
       .optional()
       .describe("Only return records with this privacy level."),
     search: z.string().trim().optional().describe("Match against the member's full name."),
-    limit: z.number().int().min(1).max(100).optional().describe("Maximum records to return (default 25)."),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(100)
+      .optional()
+      .describe("Maximum records to return (default 25)."),
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ privacy, search, limit }, ctx) => {

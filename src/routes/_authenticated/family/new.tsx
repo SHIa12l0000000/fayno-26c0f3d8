@@ -15,7 +15,10 @@ export const Route = createFileRoute("/_authenticated/family/new")({
   head: () => ({
     meta: [
       { title: "Add a family member — FAYNO" },
-      { name: "description", content: "Record a family member's name, relation, village and story." },
+      {
+        name: "description",
+        content: "Record a family member's name, relation, village and story.",
+      },
       { property: "og:title", content: "Add a family member — FAYNO" },
       {
         property: "og:description",

@@ -22,7 +22,12 @@ export default defineTool({
     about: z.string().trim().optional(),
     privacy: z.enum(["public", "family", "private"]).optional(),
   },
-  annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+  annotations: {
+    readOnlyHint: false,
+    destructiveHint: false,
+    idempotentHint: true,
+    openWorldHint: false,
+  },
   handler: async ({ id, ...fields }, ctx) => {
     const denied = requireUser(ctx);
     if (denied) return denied;
@@ -31,7 +36,6 @@ export default defineTool({
       Object.entries(fields).filter(([, value]) => value !== undefined),
     ) as Partial<typeof fields>;
     if (Object.keys(patch).length === 0) return errorResult("Pass at least one field to update.");
-
 
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase

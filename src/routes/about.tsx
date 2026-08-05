@@ -7,12 +7,14 @@ export const Route = createFileRoute("/about")({
       { title: "About FAYNO" },
       {
         name: "description",
-        content: "FAYNO helps families preserve memories, relationships and stories for future generations.",
+        content:
+          "FAYNO helps families preserve memories, relationships and stories for future generations.",
       },
       { property: "og:title", content: "About FAYNO" },
       {
         property: "og:description",
-        content: "FAYNO helps families preserve memories, relationships and stories for future generations.",
+        content:
+          "FAYNO helps families preserve memories, relationships and stories for future generations.",
       },
     ],
   }),
@@ -34,8 +36,8 @@ export const Route = createFileRoute("/about")({
         <h2>Why it&apos;s deliberately small</h2>
         <p>
           Genealogy tools are usually built for researchers. FAYNO is built for a family member who
-          has an hour and a few names. There is no chart to master and nothing to configure — a form,
-          a list, and a page you can share.
+          has an hour and a few names. There is no chart to master and nothing to configure — a
+          form, a list, and a page you can share.
         </p>
       </section>
       <section className="space-y-4">

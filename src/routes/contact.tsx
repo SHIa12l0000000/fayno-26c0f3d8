@@ -5,7 +5,10 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact FAYNO" },
-      { name: "description", content: "Questions, corrections or account help — how to reach FAYNO." },
+      {
+        name: "description",
+        content: "Questions, corrections or account help — how to reach FAYNO.",
+      },
       { property: "og:title", content: "Contact FAYNO" },
       {
         property: "og:description",

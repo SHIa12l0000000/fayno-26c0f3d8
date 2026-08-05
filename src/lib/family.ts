@@ -33,10 +33,13 @@ export const PRIVACY_OPTIONS: {
     hint: "Anyone can see this member on your public profile.",
     recommended: true,
   },
-  { value: "family", label: "Family only", hint: "Only signed-in FAYNO members can see this record." },
+  {
+    value: "family",
+    label: "Family only",
+    hint: "Only signed-in FAYNO members can see this record.",
+  },
   { value: "private", label: "Private", hint: "Only you can see this member." },
 ];
-
 
 export const RELATIONS = [
   "Father",

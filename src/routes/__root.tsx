@@ -91,10 +91,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "FAYNO — Every Family Has a Story. Preserve Yours." },
       { name: "twitter:title", content: "FAYNO — Every Family Has a Story. Preserve Yours." },
-      { property: "og:description", content: "Save your family's names, photos and memories in one secure place so future generations never forget their roots." },
-      { name: "twitter:description", content: "Save your family's names, photos and memories in one secure place so future generations never forget their roots." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/QJI8yevJbTgCXwydcsojHVF65S73/social-images/social-1785421473537-fayno.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/QJI8yevJbTgCXwydcsojHVF65S73/social-images/social-1785421473537-fayno.webp" },
+      {
+        property: "og:description",
+        content:
+          "Save your family's names, photos and memories in one secure place so future generations never forget their roots.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Save your family's names, photos and memories in one secure place so future generations never forget their roots.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/QJI8yevJbTgCXwydcsojHVF65S73/social-images/social-1785421473537-fayno.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/QJI8yevJbTgCXwydcsojHVF65S73/social-images/social-1785421473537-fayno.webp",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -194,4 +210,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

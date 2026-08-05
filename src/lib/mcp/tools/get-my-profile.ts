@@ -18,7 +18,11 @@ export default defineTool({
 
     const [{ data: profile, error: profileError }, { data: members, error: membersError }] =
       await Promise.all([
-        supabase.from("profiles").select("username, full_name, created_at").eq("id", userId).maybeSingle(),
+        supabase
+          .from("profiles")
+          .select("username, full_name, created_at")
+          .eq("id", userId)
+          .maybeSingle(),
         supabase.from("family_members").select("privacy").eq("user_id", userId),
       ]);
 
