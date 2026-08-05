@@ -112,7 +112,7 @@ function Dashboard() {
           <div className="mt-10">
             <h2 className="text-lg font-semibold">Recently added</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {stats.recent.map((member: any) => (
+              {stats.recent.map((member) => (
                 <Link
                   key={member.id}
                   to="/family/$id"

@@ -36,7 +36,7 @@ export default defineTool({
     const summary = {
       username: profile.username,
       full_name: profile.full_name,
-      public_profile_url: `https://fayno.lovable.app/${profile.username}`,
+      public_profile_url: `${SITE_URL}/${profile.username}`,
       member_counts: counts,
     };
     return textResult(JSON.stringify(summary, null, 2), summary);

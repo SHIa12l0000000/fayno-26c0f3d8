@@ -5,11 +5,12 @@ import { PageShell } from "@/components/site/PageShell";
 import { Photo } from "@/components/Photo";
 import { MEMBER_COLUMNS, lifespan, type FamilyMember } from "@/lib/family";
 import type { Profile } from "@/lib/auth";
+import { siteUrl } from "@/lib/site";
 
 export const Route = createFileRoute("/$username")({
   head: ({ params }) => {
     const handle = params.username.replace(/^@/, "");
-    const url = `https://fayno.lovable.app/@${handle}`;
+    const url = siteUrl(`/@${handle}`);
     return {
       meta: [
         { title: `@${handle} — FAYNO` },

@@ -4,7 +4,7 @@ import { LegalPage } from "@/components/site/LegalPage";
 const TITLE = "How to Start a Family Tree: A Beginner's Guide (2026)";
 const DESCRIPTION =
   "A simple step-by-step guide to starting your family tree: what to write down first, which relatives to ask, how to record names, dates and villages, and how to keep it safe.";
-const URL = "https://fayno.lovable.app/blog/how-to-start-a-family-tree";
+const URL = siteUrl("/blog/how-to-start-a-family-tree");
 
 export const Route = createFileRoute("/blog/how-to-start-a-family-tree")({
   head: () => ({

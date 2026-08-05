@@ -73,8 +73,8 @@ function SettingsPage() {
   const [deleting, setDeleting] = useState(false);
 
   const inviteLink = profile
-    ? `https://fayno.lovable.app/@${profile.username}`
-    : "https://fayno.lovable.app";
+    ? `${currentOrigin()}/@${profile.username}`
+    : currentOrigin();
 
   async function handleLogout() {
     await queryClient.cancelQueries();
