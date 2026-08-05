@@ -73,9 +73,7 @@ function SettingsPage() {
   const deleteAccount = useServerFn(deleteMyAccount);
   const [deleting, setDeleting] = useState(false);
 
-  const inviteLink = profile
-    ? `${currentOrigin()}/@${profile.username}`
-    : currentOrigin();
+  const inviteLink = profile ? `${currentOrigin()}/@${profile.username}` : currentOrigin();
 
   async function handleLogout() {
     await queryClient.cancelQueries();
