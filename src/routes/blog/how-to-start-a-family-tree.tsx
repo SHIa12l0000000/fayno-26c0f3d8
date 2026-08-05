@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
+import { siteUrl } from "@/lib/site";
 
 const TITLE = "How to Start a Family Tree: A Beginner's Guide (2026)";
 const DESCRIPTION =

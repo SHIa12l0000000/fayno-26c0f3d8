@@ -1,6 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { supabaseForUser } from "../supabase";
 import { errorResult, requireUser, textResult } from "../result";
+import { SITE_URL } from "@/lib/site";
 
 export default defineTool({
   name: "get_my_profile",
