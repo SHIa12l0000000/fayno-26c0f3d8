@@ -199,6 +199,19 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // AdSense rewrites the DOM, so load it only after hydration to avoid mismatches.
+  useEffect(() => {
+    if (document.querySelector('script[data-fayno-adsense="1"]')) return;
+    const script = document.createElement("script");
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.dataset.faynoAdsense = "1";
+    script.src =
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1493787189267270";
+    document.head.appendChild(script);
+  }, []);
+
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
